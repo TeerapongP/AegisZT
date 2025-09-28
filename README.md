@@ -55,7 +55,7 @@ aegiszt/
     ingestion-api/      # FastAPI service for log ingestion
     rule-engine/        # Sigma rules + Rego policies
     ml-detector/        # ML models (IsolationForest, XGBoost)
-    ui-dashboard/       # Next.js dashboard
+    security-dashboard/ # Next.js dashboard
     soar/               # SOAR playbooks (n8n/StackStorm)
   infra/
     k8s/                # Helm charts, manifests
