@@ -1,0 +1,78 @@
+# Node / Next.js (ui-dashboard)
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+
+# Python / FastAPI (ingestion-api, rule-engine, ml-detector, soar)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+.venv/
+venv/
+pip-wheel-metadata/
+*.log
+
+# ML / Jupyter (ml-detector, notebooks)
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+*.ckpt
+*.tensorboard/
+*.event*
+.DS_Store
+
+# Keycloak (idp)
+tmp/
+data/
+*.json~
+
+# Infrastructure (infra/)
+terraform.tfstate
+terraform.tfstate.*
+.terraform/
+.terraform.lock.hcl
+helm/values.override.yaml
+charts/*/charts/
+
+# Simulation data / logs (data/demo)
+*.log
+*.pcap
+*.csv
+*.jsonl
+*.ndjson
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+.idea/
+.vscode/
+*.code-workspace
+
+# Coverage / Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+junit.xml
+
+# Packaging
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Lock files (choose package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
