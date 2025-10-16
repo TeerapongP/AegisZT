@@ -4,7 +4,7 @@ import { Menu, Search, User, ChevronDown } from 'lucide-react';
 
 export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
   return (
-    <div className="flex items-center justify-between mb-6 px-4 sm:px-6 lg:px-8 h-16">
+    <div className="flex items-center  justify-between mb-6 px-4 sm:px-6 lg:px-8 h-16">
       {/* Left: Title + Hamburger */}
       <div className="flex items-center space-x-3">
         {/* hamburger เฉพาะจอเล็ก */}

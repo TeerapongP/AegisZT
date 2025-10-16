@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Core + icons */
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
