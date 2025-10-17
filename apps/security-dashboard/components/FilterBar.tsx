@@ -1,11 +1,10 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import { Funnel, RefreshCw, Download, AlertCircle, Zap, Database } from 'lucide-react';
+import { AlertCircle, Zap, Database, Funnel } from 'lucide-react';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 
-// Types
 interface FilterValues {
   status: 'all' | 'success' | 'failure' | 'warning';
   severity: 'all' | 'low' | 'medium' | 'high' | 'critical';
@@ -13,7 +12,6 @@ interface FilterValues {
   date?: Date | null;
 }
 
-// Main FilterBar Component
 export default function FilterBar({
   onChange,
   onExport,
@@ -35,33 +33,22 @@ export default function FilterBar({
   };
 
   const reset = () => {
-    const resetValues: FilterValues = {
-      status: 'all',
-      severity: 'all',
-      service: 'all',
-      date: null,
-    };
+    const resetValues: FilterValues = { status: 'all', severity: 'all', service: 'all', date: null };
     setValues(resetValues);
     onChange?.(resetValues);
   };
 
   const hasActive = useMemo(
-    () =>
-      values.status !== 'all' ||
-      values.severity !== 'all' ||
-      values.service !== 'all' ||
-      !!values.date,
+    () => values.status !== 'all' || values.severity !== 'all' || values.service !== 'all' || !!values.date,
     [values]
   );
 
-  // Dropdown options
   const statusOptions = [
     { label: 'All Status', value: 'all' },
     { label: 'Success', value: 'success' },
     { label: 'Failure', value: 'failure' },
     { label: 'Warning', value: 'warning' },
   ];
-
   const severityOptions = [
     { label: 'All Levels', value: 'all' },
     { label: 'Low', value: 'low' },
@@ -69,7 +56,6 @@ export default function FilterBar({
     { label: 'High', value: 'high' },
     { label: 'Critical', value: 'critical' },
   ];
-
   const serviceOptions = [
     { label: 'All Services', value: 'all' },
     { label: 'Web Application', value: 'web' },
@@ -78,32 +64,41 @@ export default function FilterBar({
     { label: 'API', value: 'api' },
   ];
 
+  // shared PrimeReact passThrough styles for inputs (สูง 40px, pill, โฟกัสฟ้า)
+  const inputPt = {
+    root: { className: 'tw-w-full tw-h-10 tw-rounded-lg tw-border tw-border-slate-300 focus:tw-ring-2 focus:tw-ring-sky-400 focus:tw-border-sky-400 tw-bg-white tw-text-slate-800' },
+    input: { className: 'tw-h-10 tw-rounded-lg tw-pl-3 tw-pr-9 tw-text-sm tw-border-0 focus:tw-ring-0 tw-bg-transparent tw-text-slate-800 placeholder:tw-text-slate-400' },
+    trigger: { className: 'tw-text-slate-500' },
+    panel: { className: 'tw-rounded-lg tw-border tw-border-slate-200 tw-shadow-md' }
+  } as const;
+
+  const calendarPt = {
+    input: { root: { className: 'tw-w-full tw-h-10 tw-rounded-lg tw-border tw-border-slate-300 tw-bg-white tw-text-slate-800 focus:tw-ring-2 focus:tw-ring-sky-400 focus:tw-border-sky-400 tw-pl-3 tw-pr-10 tw-text-sm' } },
+    dropdownButton: { root: { className: 'tw-text-slate-500' } },
+    panel: { className: 'tw-rounded-lg tw-border tw-border-slate-200 tw-shadow-md' }
+  } as const;
+
   return (
-    <div className="tw-bg-white tw-border tw-border-gray-200 tw-rounded-xl tw-shadow-sm tw-overflow-hidden">
+    <div className="tw-bg-white tw-border tw-border-slate-200 tw-rounded-xl tw-shadow-sm tw-overflow-hidden">
       {/* Header */}
-      <div className="tw-px-6 tw-py-4 tw-bg-gradient-to-r tw-from-slate-50 tw-to-gray-50 tw-border-b tw-border-gray-200">
+      <div className="tw-px-6 tw-py-4 tw-bg-gradient-to-r tw-from-slate-50 tw-to-gray-50 tw-border-b tw-border-slate-200">
         <div className="tw-flex tw-items-center tw-justify-between">
           <div className="tw-flex tw-items-center tw-gap-4">
-            <div className="tw-h-11 tw-w-11 tw-rounded-xl tw-bg-gradient-to-br tw-from-blue-500 tw-to-blue-600 tw-shadow-md tw-grid tw-place-items-center">
+            <div className="tw-h-11 tw-w-11 tw-rounded-xl tw-bg-gradient-to-br tw-from-sky-500 tw-to-cyan-500 tw-shadow-md tw-grid tw-place-items-center">
               <Funnel className="tw-h-5 tw-w-5 tw-text-white" />
             </div>
             <div>
-              <h3 className="tw-text-lg tw-font-bold tw-text-gray-900">Event Filters</h3>
-              <p className="tw-text-xs tw-text-gray-600 tw-mt-0.5">
-                Refine your security event analysis
-              </p>
+              <h3 className="tw-text-lg tw-font-bold tw-text-slate-900">Event Filters</h3>
+              <p className="tw-text-xs tw-text-slate-600 tw-mt-0.5">Refine your security event analysis</p>
             </div>
           </div>
           <span
-            className={`tw-inline-flex tw-items-center tw-gap-2 tw-rounded-full tw-px-4 tw-py-1.5 tw-text-xs tw-font-semibold tw-border tw-shadow-sm tw-transition-all ${hasActive
-              ? 'tw-bg-blue-50 tw-text-blue-700 tw-border-blue-200'
-              : 'tw-bg-gray-50 tw-text-gray-600 tw-border-gray-200'
-              }`}
+            className={[
+              'tw-inline-flex tw-items-center tw-gap-2 tw-rounded-full tw-px-4 tw-py-1.5 tw-text-xs tw-font-semibold tw-border tw-shadow-sm tw-transition-all',
+              hasActive ? 'tw-bg-sky-50 tw-text-sky-700 tw-border-sky-200' : 'tw-bg-slate-50 tw-text-slate-600 tw-border-slate-200',
+            ].join(' ')}
           >
-            <span
-              className={`tw-h-2 tw-w-2 tw-rounded-full ${hasActive ? 'tw-bg-blue-500 tw-animate-pulse' : 'tw-bg-gray-400'
-                }`}
-            />
+            <span className={['tw-h-2 tw-w-2 tw-rounded-full', hasActive ? 'tw-bg-sky-500 tw-animate-pulse' : 'tw-bg-slate-400'].join(' ')} />
             {hasActive ? 'Active filters' : 'No filters'}
           </span>
         </div>
@@ -112,7 +107,6 @@ export default function FilterBar({
       {/* Controls */}
       <div className="tw-px-6 tw-py-6 tw-bg-white">
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-5">
-          {/* Status */}
           <Field label="Status" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.status}
@@ -120,10 +114,10 @@ export default function FilterBar({
               onChange={(e) => update({ status: e.value })}
               placeholder="Select Status"
               className="tw-w-full"
+              pt={inputPt}
             />
           </Field>
 
-          {/* Severity */}
           <Field label="Threat Level" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.severity}
@@ -131,10 +125,10 @@ export default function FilterBar({
               onChange={(e) => update({ severity: e.value })}
               placeholder="Select Severity"
               className="tw-w-full"
+              pt={inputPt}
             />
           </Field>
 
-          {/* Service */}
           <Field label="Service Type" icon={<Zap className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.service}
@@ -142,51 +136,61 @@ export default function FilterBar({
               onChange={(e) => update({ service: e.value })}
               placeholder="Select Service"
               className="tw-w-full"
+              pt={inputPt}
             />
           </Field>
 
-          {/* Date */}
           <Field label="Time Range" icon={<Database className="tw-h-3.5 tw-w-3.5" />}>
             <Calendar
               value={values.date}
-              onChange={(e) => update({ date: e.value as Date | null })}
+              onChange={(e) => update({ date: (e as any).value as Date | null })}
               placeholder="Select Date"
               dateFormat="dd/mm/yy"
               showIcon
               className="tw-w-full"
+              pt={calendarPt}
             />
           </Field>
         </div>
 
         {/* Actions */}
-        <div className="tw-mt-6 tw-pt-5 tw-border-t tw-border-gray-100 tw-flex tw-flex-col sm:tw-flex-row tw-gap-3 tw-items-stretch sm:tw-items-center tw-justify-between">
+        <div className="tw-mt-6 tw-pt-5 tw-border-t tw-border-slate-100 tw-flex tw-flex-col sm:tw-flex-row tw-gap-3 tw-items-stretch sm:tw-items-center tw-justify-between">
           <Button
             label="Reset Filters"
-            icon={<RefreshCw className="tw-h-4 tw-w-4" />}
+            icon="pi pi-refresh"
             onClick={reset}
-            outlined
-            className="
-            tw-inline-flex tw-items-center tw-justify-center tw-gap-2
-            tw-rounded-lg tw-border tw-border-blue-500
-            tw-bg-blue-50 tw-px-4 tw-py-2.5 tw-text-sm tw-font-medium tw-text-blue-700
-            hover:tw-bg-blue-100 hover:tw-border-blue-600
-            tw-transition-colors tw-shadow-sm
-          "
+            size="small"
+            className={[
+              'tw-bg-white tw-border tw-border-slate-300 hover:tw-border-sky-400 hover:tw-bg-sky-50',
+              'tw-text-sky-700 hover:tw-text-sky-800',
+              'tw-rounded-lg tw-font-medium tw-px-4 tw-py-2',
+              'tw-shadow-sm hover:tw-shadow-md',
+              'focus:tw-ring-2 focus:tw-ring-sky-300 focus:tw-outline-none',
+              'tw-transition-all tw-duration-200 tw-ease-in-out',
+              '[&>span>.pi]:tw-mr-2',
+            ].join(' ')}
           />
 
 
-
           <div className="tw-flex tw-items-center tw-gap-3">
-            <div className="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-bg-emerald-50 tw-border tw-border-emerald-200 tw-rounded-lg">
-              <span className="tw-h-2 tw-w-2 tw-bg-emerald-500 tw-rounded-full tw-animate-pulse" />
-              <span className="tw-text-xs tw-font-semibold tw-text-emerald-700">Real-time monitoring</span>
+            {/* เปลี่ยนเป็นฟ้า/น้ำเงินให้เข้าธีม */}
+            <div className="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-bg-sky-50 tw-border tw-border-sky-200 tw-rounded-lg">
+              <span className="tw-h-2 tw-w-2 tw-bg-sky-500 tw-rounded-full tw-animate-pulse" />
+              <span className="tw-text-xs tw-font-semibold tw-text-sky-700">Real-time monitoring</span>
             </div>
 
             <Button
               label="Export Data"
-              icon={<Download className="tw-h-4 tw-w-4" />}
+              icon="pi pi-download"
               onClick={onExport}
-              className="tw-inline-flex tw-items-center tw-justify-center tw-gap-2 tw-px-5 tw-py-2.5 tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-rounded-lg tw-text-sm tw-font-semibold tw-shadow-sm tw-transition-colors"
+              size="small"
+              className={[
+                'tw-bg-gradient-to-r tw-from-sky-500 tw-to-cyan-500 hover:tw-from-sky-600 hover:tw-to-cyan-600',
+                'tw-text-white tw-font-medium',
+                'tw-rounded-lg tw-px-4 tw-py-2 tw-shadow-sm hover:tw-shadow-md',
+                'focus:tw-ring-2 focus:tw-ring-sky-300 focus:tw-outline-none',
+                'tw-transition-all tw-duration-200 tw-ease-in-out',
+              ].join(' ')}
             />
           </div>
         </div>
@@ -195,20 +199,19 @@ export default function FilterBar({
   );
 }
 
-/* ---------- Reusable Components ---------- */
 function Field({
   label,
   icon,
-  children
+  children,
 }: {
   label: string;
   icon: React.ReactNode;
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <label className="tw-block tw-space-y-2">
-      <span className="tw-flex tw-items-center tw-gap-2 tw-text-xs tw-font-bold tw-uppercase tw-tracking-wider tw-text-gray-700">
-        <span className="tw-text-blue-600">{icon}</span>
+      <span className="tw-flex tw-items-center tw-gap-2 tw-text-xs tw-font-bold tw-uppercase tw-tracking-wider tw-text-slate-700">
+        <span className="tw-text-sky-600">{icon}</span>
         {label}
       </span>
       {children}

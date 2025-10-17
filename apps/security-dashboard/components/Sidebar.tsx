@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Shield, BarChart3, AlertTriangle, FileText, Settings, Activity, X } from "lucide-react";
+import { Button } from 'primereact/button';
+import { Sidebar as PrimeSidebar } from 'primereact/sidebar';
 import type { MenuItem } from "@/types";
 
 const menuItems: MenuItem[] = [
@@ -38,9 +40,13 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
             <Shield className="tw-w-8 tw-h-8 tw-text-blue-400" />
             <span className="tw-text-xl tw-font-bold">AegisZT</span>
           </div>
-          <button onClick={onClose} className="lg:tw-hidden">
-            <X className="tw-w-6 tw-h-6 tw-text-slate-300" />
-          </button>
+          <Button 
+            icon="pi pi-times" 
+            onClick={onClose} 
+            text 
+            className="lg:tw-hidden tw-text-slate-300"
+            size="small"
+          />
         </div>
 
         <nav className="tw-mt-6 tw-space-y-1 tw-px-2">

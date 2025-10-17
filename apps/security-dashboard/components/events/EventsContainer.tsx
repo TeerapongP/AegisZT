@@ -87,7 +87,13 @@ export default function EventsContainer({ rows }: { rows: EventData[] }) {
     <>
       <EventsHeader />
       <EventsChart />
-      <FilterBar onChange={setFilters} onExport={handleExport} />
+      <FilterBar 
+        onChange={(values) => setFilters({
+          ...values,
+          date: values.date ?? null
+        })} 
+        onExport={handleExport} 
+      />
       <EventsTable rows={filtered} />
     </>
   );

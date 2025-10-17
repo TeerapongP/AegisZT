@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
+import { Card } from 'primereact/card';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -67,11 +68,10 @@ export default function LineChart() {
   }, []);
 
   return (
-    <div className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-sm">
-      <h3 className="tw-text-lg tw-font-semibold tw-text-gray-900 tw-mb-4">Events over time</h3>
+    <Card className="tw-shadow-sm" title="Events over time">
       <div className="tw-h-64">
         <canvas ref={canvasRef} />
       </div>
-    </div>
+    </Card>
   );
 }

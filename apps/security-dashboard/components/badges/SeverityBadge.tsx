@@ -1,16 +1,44 @@
 import { EventSeverity } from '@/types/eventSeverity';
 import React from 'react';
+import { Tag } from 'primereact/tag';
 
 export default function SeverityBadge({ severity }: { severity: EventSeverity }) {
-  const map: Record<EventSeverity, string> = {
-    Low: 'tw-bg-blue-100 tw-text-blue-800',
-    Medium: 'tw-bg-indigo-100 tw-text-indigo-800',
-    High: 'tw-bg-purple-100 tw-text-purple-800',
-    Critical: 'tw-bg-red-100 tw-text-red-800',
+  const getSeverity = (severity: EventSeverity) => {
+    switch (severity) {
+      case 'Low':
+        return 'info';
+      case 'Medium':
+        return 'warning';
+      case 'High':
+        return 'danger';
+      case 'Critical':
+        return 'danger';
+      default:
+        return 'info';
+    }
   };
+
+  const getIcon = (severity: EventSeverity) => {
+    switch (severity) {
+      case 'Low':
+        return 'pi pi-info-circle';
+      case 'Medium':
+        return 'pi pi-exclamation-triangle';
+      case 'High':
+        return 'pi pi-exclamation-triangle';
+      case 'Critical':
+        return 'pi pi-times-circle';
+      default:
+        return 'pi pi-info-circle';
+    }
+  };
+
   return (
-    <span className={`tw-px-2 tw-py-1 tw-text-xs tw-font-medium tw-rounded-full ${map[severity]}`}>
-      {severity}
-    </span>
+    <Tag 
+      value={severity} 
+      severity={getSeverity(severity)}
+      icon={getIcon(severity)}
+      rounded
+    />
   );
 }
