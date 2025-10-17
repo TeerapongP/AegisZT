@@ -19,31 +19,31 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
     <>
       {/* overlay (mobile) */}
       <div
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${
-          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`tw-fixed tw-inset-0 tw-z-40 tw-bg-black/40 tw-transition-opacity lg:tw-hidden ${
+          open ? "tw-opacity-100" : "tw-opacity-0 tw-pointer-events-none"
         }`}
         onClick={onClose}
       />
 
       {/* sidebar */}
       <aside
-        className={`fixed z-50 inset-y-0 left-0 w-64
-        bg-slate-900 text-slate-100
-        transform transition-transform duration-300 ease-in-out
-        lg:translate-x-0 lg:static lg:block
-        ${open ? "translate-x-0" : "-translate-x-full"}`}
+        className={`tw-fixed tw-z-50 tw-inset-y-0 tw-left-0 tw-w-64
+        tw-bg-slate-900 tw-text-slate-100
+        tw-transform tw-transition-transform tw-duration-300 tw-ease-in-out
+        lg:tw-translate-x-0 lg:tw-static lg:tw-block
+        ${open ? "tw-translate-x-0" : "-tw-translate-x-full"}`}
       >
-        <div className="p-6 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Shield className="w-8 h-8 text-blue-400" />
-            <span className="text-xl font-bold">AegisZT</span>
+        <div className="tw-p-6 tw-flex tw-justify-between tw-items-center">
+          <div className="tw-flex tw-items-center tw-space-x-2">
+            <Shield className="tw-w-8 tw-h-8 tw-text-blue-400" />
+            <span className="tw-text-xl tw-font-bold">AegisZT</span>
           </div>
-          <button onClick={onClose} className="lg:hidden">
-            <X className="w-6 h-6 text-slate-300" />
+          <button onClick={onClose} className="lg:tw-hidden">
+            <X className="tw-w-6 tw-h-6 tw-text-slate-300" />
           </button>
         </div>
 
-        <nav className="mt-6 space-y-1 px-2">
+        <nav className="tw-mt-6 tw-space-y-1 tw-px-2">
           {menuItems.map(({ icon: Icon, label, path = "#" }, idx) => {
             const isActive =
               path === "/"
@@ -56,14 +56,14 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
                 href={path}
                 aria-current={isActive ? "page" : undefined}
                 onClick={onClose} 
-                className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                className={`tw-flex tw-items-center tw-gap-3 tw-px-3 tw-py-2 tw-rounded-lg tw-transition-colors ${
                   isActive
-                    ? "bg-slate-700 text-slate-100"
-                    : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                    ? "tw-bg-slate-700 tw-text-slate-100"
+                    : "tw-text-slate-300 hover:tw-bg-slate-700 hover:tw-text-white"
                 }`}
               >
-                <Icon className="w-5 h-5" />
-                <span className="text-sm font-medium">{label}</span>
+                <Icon className="tw-w-5 tw-h-5" />
+                <span className="tw-text-sm tw-font-medium">{label}</span>
               </Link>
             );
           })}

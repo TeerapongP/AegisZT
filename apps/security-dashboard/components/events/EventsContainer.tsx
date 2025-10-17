@@ -8,9 +8,9 @@ import FilterBar from '../FilterBar';
 
 function EventsHeader() {
   return (
-    <div className="mb-4 sm:mb-6">
-      <h1 className="text-2xl font-bold text-gray-900">Events</h1>
-      <p className="text-sm text-gray-500">
+    <div className="tw-mb-4 sm:tw-mb-6">
+      <h1 className="tw-text-2xl tw-font-bold tw-text-gray-900">Events</h1>
+      <p className="tw-text-sm tw-text-gray-500">
         Monitor and analyze security events in real-time
       </p>
     </div>

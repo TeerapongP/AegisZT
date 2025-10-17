@@ -4,41 +4,41 @@ import { Menu, Search, User, ChevronDown } from 'lucide-react';
 
 export default function Topbar({ onMenuClick }: { onMenuClick?: () => void }) {
   return (
-    <div className="flex items-center  justify-between mb-6 px-4 sm:px-6 lg:px-8 h-16">
+    <div className="tw-flex tw-items-center tw-justify-between tw-mb-6 tw-px-4 sm:tw-px-6 lg:tw-px-8 tw-h-16">
       {/* Left: Title + Hamburger */}
-      <div className="flex items-center space-x-3">
+      <div className="tw-flex tw-items-center tw-space-x-3">
         {/* hamburger เฉพาะจอเล็ก */}
         <button
-          className="lg:hidden p-2 rounded-md border border-gray-200"
+          className="lg:tw-hidden tw-p-2 tw-rounded-md tw-border tw-border-gray-200"
           onClick={onMenuClick}
         >
-          <Menu className="w-5 h-5 text-gray-600" />
+          <Menu className="tw-w-5 tw-h-5 tw-text-gray-600" />
         </button>
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+        <h1 className="tw-text-xl sm:tw-text-2xl tw-font-bold tw-text-gray-900">
           Security Monitoring Dashboard
         </h1>
       </div>
 
       {/* Right: Search + User */}
-      <div className="flex items-center space-x-4">
+      <div className="tw-flex tw-items-center tw-space-x-4">
         {/* Search bar - ซ่อนบนจอเล็ก */}
-        <div className="relative hidden sm:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <div className="tw-relative tw-hidden sm:tw-block">
+          <Search className="tw-absolute tw-left-3 tw-top-1/2 -tw-translate-y-1/2 tw-w-4 tw-h-4 tw-text-gray-400" />
           <input
             type="text"
             placeholder="Search"
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+            className="tw-pl-10 tw-pr-4 tw-py-2 tw-border tw-border-gray-300 tw-rounded-lg focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-border-transparent tw-text-sm"
           />
         </div>
 
         {/* Profile */}
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-white" />
+        <div className="tw-flex tw-items-center tw-space-x-2">
+          <div className="tw-w-8 tw-h-8 tw-bg-blue-500 tw-rounded-full tw-flex tw-items-center tw-justify-center">
+            <User className="tw-w-4 tw-h-4 tw-text-white" />
           </div>
           {/* ชื่อซ่อนบนมือถือ */}
-          <span className="hidden sm:inline text-gray-700">John Doe</span>
-          <ChevronDown className="w-4 h-4 text-gray-400" />
+          <span className="tw-hidden sm:tw-inline tw-text-gray-700">John Doe</span>
+          <ChevronDown className="tw-w-4 tw-h-4 tw-text-gray-400" />
         </div>
       </div>
     </div>

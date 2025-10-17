@@ -13,29 +13,29 @@ const recentEvents: EventData[] = [
 
 export default function EventsTable() {
   return (
-    <div className="bg-white rounded-lg shadow-sm">
-      <div className="p-6 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">Recent events</h3>
+    <div className="tw-bg-white tw-rounded-lg tw-shadow-sm">
+      <div className="tw-p-6 tw-border-b tw-border-gray-200">
+        <h3 className="tw-text-lg tw-font-semibold tw-text-gray-900">Recent events</h3>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50">
+      <div className="tw-overflow-x-auto">
+        <table className="tw-w-full">
+          <thead className="tw-bg-gray-50">
             <tr>
               {['Timestamp','IP Address','User','Status','Service'].map((h) => (
-                <th key={h} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th key={h} className="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="tw-bg-white tw-divide-y tw-divide-gray-200">
             {recentEvents.map((e, i) => (
-              <tr key={i} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.timestamp}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.ip}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.user}</td>
-                <td className="px-6 py-4 whitespace-nowrap"><StatusBadge status={e.status} /></td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.service}</td>
+              <tr key={i} className="hover:tw-bg-gray-50">
+                <td className="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-900">{e.timestamp}</td>
+                <td className="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-900">{e.ip}</td>
+                <td className="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-900">{e.user}</td>
+                <td className="tw-px-6 tw-py-4 tw-whitespace-nowrap"><StatusBadge status={e.status} /></td>
+                <td className="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-900">{e.service}</td>
               </tr>
             ))}
           </tbody>

@@ -79,29 +79,29 @@ export default function FilterBar({
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+    <div className="tw-bg-white tw-border tw-border-gray-200 tw-rounded-xl tw-shadow-sm tw-overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 bg-gradient-to-r from-slate-50 to-gray-50 border-b border-gray-200">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md grid place-items-center">
-              <Funnel className="h-5 w-5 text-white" />
+      <div className="tw-px-6 tw-py-4 tw-bg-gradient-to-r tw-from-slate-50 tw-to-gray-50 tw-border-b tw-border-gray-200">
+        <div className="tw-flex tw-items-center tw-justify-between">
+          <div className="tw-flex tw-items-center tw-gap-4">
+            <div className="tw-h-11 tw-w-11 tw-rounded-xl tw-bg-gradient-to-br tw-from-blue-500 tw-to-blue-600 tw-shadow-md tw-grid tw-place-items-center">
+              <Funnel className="tw-h-5 tw-w-5 tw-text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-gray-900">Event Filters</h3>
-              <p className="text-xs text-gray-600 mt-0.5">
+              <h3 className="tw-text-lg tw-font-bold tw-text-gray-900">Event Filters</h3>
+              <p className="tw-text-xs tw-text-gray-600 tw-mt-0.5">
                 Refine your security event analysis
               </p>
             </div>
           </div>
           <span
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold border shadow-sm transition-all ${hasActive
-              ? 'bg-blue-50 text-blue-700 border-blue-200'
-              : 'bg-gray-50 text-gray-600 border-gray-200'
+            className={`tw-inline-flex tw-items-center tw-gap-2 tw-rounded-full tw-px-4 tw-py-1.5 tw-text-xs tw-font-semibold tw-border tw-shadow-sm tw-transition-all ${hasActive
+              ? 'tw-bg-blue-50 tw-text-blue-700 tw-border-blue-200'
+              : 'tw-bg-gray-50 tw-text-gray-600 tw-border-gray-200'
               }`}
           >
             <span
-              className={`h-2 w-2 rounded-full ${hasActive ? 'bg-blue-500 animate-pulse' : 'bg-gray-400'
+              className={`tw-h-2 tw-w-2 tw-rounded-full ${hasActive ? 'tw-bg-blue-500 tw-animate-pulse' : 'tw-bg-gray-400'
                 }`}
             />
             {hasActive ? 'Active filters' : 'No filters'}
@@ -110,83 +110,83 @@ export default function FilterBar({
       </div>
 
       {/* Controls */}
-      <div className="px-6 py-6 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="tw-px-6 tw-py-6 tw-bg-white">
+        <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-5">
           {/* Status */}
-          <Field label="Status" icon={<AlertCircle className="h-3.5 w-3.5" />}>
+          <Field label="Status" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.status}
               options={statusOptions}
               onChange={(e) => update({ status: e.value })}
               placeholder="Select Status"
-              className="w-full"
+              className="tw-w-full"
             />
           </Field>
 
           {/* Severity */}
-          <Field label="Threat Level" icon={<AlertCircle className="h-3.5 w-3.5" />}>
+          <Field label="Threat Level" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.severity}
               options={severityOptions}
               onChange={(e) => update({ severity: e.value })}
               placeholder="Select Severity"
-              className="w-full"
+              className="tw-w-full"
             />
           </Field>
 
           {/* Service */}
-          <Field label="Service Type" icon={<Zap className="h-3.5 w-3.5" />}>
+          <Field label="Service Type" icon={<Zap className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.service}
               options={serviceOptions}
               onChange={(e) => update({ service: e.value })}
               placeholder="Select Service"
-              className="w-full"
+              className="tw-w-full"
             />
           </Field>
 
           {/* Date */}
-          <Field label="Time Range" icon={<Database className="h-3.5 w-3.5" />}>
+          <Field label="Time Range" icon={<Database className="tw-h-3.5 tw-w-3.5" />}>
             <Calendar
               value={values.date}
               onChange={(e) => update({ date: e.value as Date | null })}
               placeholder="Select Date"
               dateFormat="dd/mm/yy"
               showIcon
-              className="w-full"
+              className="tw-w-full"
             />
           </Field>
         </div>
 
         {/* Actions */}
-        <div className="mt-6 pt-5 border-t border-gray-100 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+        <div className="tw-mt-6 tw-pt-5 tw-border-t tw-border-gray-100 tw-flex tw-flex-col sm:tw-flex-row tw-gap-3 tw-items-stretch sm:tw-items-center tw-justify-between">
           <Button
             label="Reset Filters"
-            icon={<RefreshCw className="h-4 w-4" />}
+            icon={<RefreshCw className="tw-h-4 tw-w-4" />}
             onClick={reset}
             outlined
             className="
-            inline-flex items-center justify-center gap-2
-            rounded-lg border border-blue-500
-            bg-blue-50 px-4 py-2.5 text-sm font-medium text-blue-700
-            hover:bg-blue-100 hover:border-blue-600
-            transition-colors shadow-sm
+            tw-inline-flex tw-items-center tw-justify-center tw-gap-2
+            tw-rounded-lg tw-border tw-border-blue-500
+            tw-bg-blue-50 tw-px-4 tw-py-2.5 tw-text-sm tw-font-medium tw-text-blue-700
+            hover:tw-bg-blue-100 hover:tw-border-blue-600
+            tw-transition-colors tw-shadow-sm
           "
           />
 
 
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg">
-              <span className="h-2 w-2 bg-emerald-500 rounded-full animate-pulse" />
-              <span className="text-xs font-semibold text-emerald-700">Real-time monitoring</span>
+          <div className="tw-flex tw-items-center tw-gap-3">
+            <div className="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-bg-emerald-50 tw-border tw-border-emerald-200 tw-rounded-lg">
+              <span className="tw-h-2 tw-w-2 tw-bg-emerald-500 tw-rounded-full tw-animate-pulse" />
+              <span className="tw-text-xs tw-font-semibold tw-text-emerald-700">Real-time monitoring</span>
             </div>
 
             <Button
               label="Export Data"
-              icon={<Download className="h-4 w-4" />}
+              icon={<Download className="tw-h-4 tw-w-4" />}
               onClick={onExport}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors"
+              className="tw-inline-flex tw-items-center tw-justify-center tw-gap-2 tw-px-5 tw-py-2.5 tw-bg-blue-600 hover:tw-bg-blue-700 tw-text-white tw-rounded-lg tw-text-sm tw-font-semibold tw-shadow-sm tw-transition-colors"
             />
           </div>
         </div>
@@ -206,9 +206,9 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <label className="block space-y-2">
-      <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-700">
-        <span className="text-blue-600">{icon}</span>
+    <label className="tw-block tw-space-y-2">
+      <span className="tw-flex tw-items-center tw-gap-2 tw-text-xs tw-font-bold tw-uppercase tw-tracking-wider tw-text-gray-700">
+        <span className="tw-text-blue-600">{icon}</span>
         {label}
       </span>
       {children}

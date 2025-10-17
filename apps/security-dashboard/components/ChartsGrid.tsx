@@ -4,7 +4,7 @@ import DonutChart from './charts/DonutChart';
 
 export default function ChartsGrid() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-mb-8">
       <LineChart />
       <DonutChart />
     </div>

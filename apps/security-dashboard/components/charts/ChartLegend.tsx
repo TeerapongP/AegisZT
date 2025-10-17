@@ -1,19 +1,19 @@
 import React from 'react';
 
 const items = [
-  { color: 'bg-blue-400', label: 'Low' },
-  { color: 'bg-blue-600', label: 'Medium' },
-  { color: 'bg-purple-500', label: 'High' },
-  { color: 'bg-red-500', label: 'Critical' }
+  { color: 'tw-bg-blue-400', label: 'Low' },
+  { color: 'tw-bg-blue-600', label: 'Medium' },
+  { color: 'tw-bg-purple-500', label: 'High' },
+  { color: 'tw-bg-red-500', label: 'Critical' }
 ];
 
 export default function ChartLegend() {
   return (
-    <div className="ml-8 space-y-3">
+    <div className="tw-ml-8 tw-space-y-3">
       {items.map((it, i) => (
-        <div key={i} className="flex items-center space-x-3">
-          <div className={`w-3 h-3 rounded-full ${it.color}`} />
-          <span className="text-sm text-gray-600">{it.label}</span>
+        <div key={i} className="tw-flex tw-items-center tw-space-x-3">
+          <div className={`tw-w-3 tw-h-3 tw-rounded-full ${it.color}`} />
+          <span className="tw-text-sm tw-text-gray-600">{it.label}</span>
         </div>
       ))}
     </div>

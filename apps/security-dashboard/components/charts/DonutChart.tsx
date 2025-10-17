@@ -65,10 +65,10 @@ export default function DonutChart() {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Alerts by severity</h3>
-      <div className="h-64 flex items-center">
-        <div className="w-48 h-48 mx-auto">
+    <div className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-sm">
+      <h3 className="tw-text-lg tw-font-semibold tw-text-gray-900 tw-mb-4">Alerts by severity</h3>
+      <div className="tw-h-64 tw-flex tw-items-center">
+        <div className="tw-w-48 tw-h-48 tw-mx-auto">
           <canvas ref={canvasRef} />
         </div>
         <ChartLegend />

@@ -62,15 +62,15 @@ export default function EventsChart() {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Events Timeline (Last 24 Hours)</h3>
-        <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50">
-          <RefreshCw className="w-4 h-4 inline mr-1" />
+    <div className="tw-bg-white tw-p-6 tw-rounded-lg tw-shadow-sm tw-mb-8">
+      <div className="tw-flex tw-items-center tw-justify-between tw-mb-4">
+        <h3 className="tw-text-lg tw-font-semibold tw-text-gray-900">Events Timeline (Last 24 Hours)</h3>
+        <button className="tw-px-3 tw-py-1 tw-text-sm tw-border tw-border-gray-300 tw-rounded-md hover:tw-bg-gray-50">
+          <RefreshCw className="tw-w-4 tw-h-4 tw-inline tw-mr-1" />
           Refresh
         </button>
       </div>
-      <div className="h-80">
+      <div className="tw-h-80">
         <canvas ref={chartRef} />
       </div>
     </div>
