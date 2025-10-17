@@ -22,6 +22,7 @@ export default function EventsContainer({ rows }: { rows: EventData[] }) {
     status: 'all',
     severity: 'all',
     service: 'all',
+    date: null,
   });
 
   const filtered = useMemo(() => {
