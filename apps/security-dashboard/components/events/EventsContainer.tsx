@@ -42,7 +42,7 @@ export default function EventsContainer({ rows }: { rows: EventData[] }) {
         norm(r.service) === norm(filters.service);
 
       const dateOk =
-        !filters.date || r.timestamp.slice(0, 10) === filters.date;
+        !filters.date || r.timestamp.slice(0, 10) === filters.date.toISOString().slice(0, 10);
 
       return statusOk && severityOk && serviceOk && dateOk;
     });
