@@ -26,7 +26,7 @@ export default function LoginCard({
         </div>
       </div>
 
-      <form className="tw-mt-8 tw-space-y-4">{children}</form>
+      <div className="tw-mt-8 tw-space-y-4">{children}</div>
     </div>
   );
 }

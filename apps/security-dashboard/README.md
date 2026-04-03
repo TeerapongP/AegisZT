@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Authentication
+
+This app uses NextAuth v5 with Passkey support and Prisma.
+
+Required environment variables are shown in [.env.example](.env.example). Copy them into your local `.env` file, then run Prisma generate after configuring `DATABASE_URL`.
+
+```bash
+pnpm exec prisma generate
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
