@@ -10,7 +10,7 @@ const stats = [
 
 export default function StatsGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+    <div className="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 xl:tw-grid-cols-4 tw-gap-6 tw-mb-8">
       {stats.map((s, i) => (
         <StatsCard key={i} title={s.title} value={s.value} />
       ))}

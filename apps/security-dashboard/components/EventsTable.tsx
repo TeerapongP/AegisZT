@@ -1,4 +1,7 @@
 import React from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Card } from 'primereact/card';
 import StatusBadge from './StatusBadge';
 import type { EventData } from '@/types';
 
@@ -12,35 +15,32 @@ const recentEvents: EventData[] = [
 ];
 
 export default function EventsTable() {
-  return (
-    <div className="bg-white rounded-lg shadow-sm">
-      <div className="p-6 border-b border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-900">Recent events</h3>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              {['Timestamp','IP Address','User','Status','Service'].map((h) => (
-                <th key={h} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {recentEvents.map((e, i) => (
-              <tr key={i} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.timestamp}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.ip}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.user}</td>
-                <td className="px-6 py-4 whitespace-nowrap"><StatusBadge status={e.status} /></td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{e.service}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  const statusBodyTemplate = (rowData: EventData) => {
+    return <StatusBadge status={rowData.status} />;
+  };
+
+  const header = (
+    <div className="tw-p-4">
+      <h3 className="tw-text-lg tw-font-semibold tw-text-gray-900">Recent events</h3>
     </div>
+  );
+
+  return (
+    <Card className="tw-shadow-sm">
+      <DataTable 
+        value={recentEvents} 
+        header={header}
+        stripedRows 
+        showGridlines 
+        responsiveLayout="scroll"
+        className="tw-w-full"
+      >
+        <Column field="timestamp" header="Timestamp" sortable />
+        <Column field="ip" header="IP Address" sortable />
+        <Column field="user" header="User" sortable />
+        <Column field="status" header="Status" body={statusBodyTemplate} />
+        <Column field="service" header="Service" sortable />
+      </DataTable>
+    </Card>
   );
 }

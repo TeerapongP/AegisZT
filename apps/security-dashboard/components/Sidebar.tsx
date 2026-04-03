@@ -1,49 +1,76 @@
 "use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Shield, BarChart3, AlertTriangle, FileText, Settings, Activity, X } from "lucide-react";
+import { Button } from 'primereact/button';
+import { Sidebar as PrimeSidebar } from 'primereact/sidebar';
 import type { MenuItem } from "@/types";
 
 const menuItems: MenuItem[] = [
-  { icon: BarChart3, label: "Overview", active: true },
-  { icon: Activity, label: "Events" },
-  { icon: AlertTriangle, label: "Alerts" },
-  { icon: FileText, label: "Reports" },
-  { icon: Settings, label: "Settings" },
+  { icon: BarChart3, label: "Overview", path: "/" },
+  { icon: Activity,  label: "Events",   path: "/events" },
+  { icon: AlertTriangle, label: "Alerts",  path: "/alerts" },
+  { icon: FileText,  label: "Reports",  path: "/reports" },
+  { icon: Settings,  label: "Settings", path: "/settings" },
 ];
 
 export default function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const pathname = usePathname();
+
   return (
     <>
+      {/* overlay (mobile) */}
       <div
-        className={`fixed inset-0 z-40 bg-black/40 transition-opacity lg:hidden ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`tw-fixed tw-inset-0 tw-z-40 tw-bg-black/40 tw-transition-opacity lg:tw-hidden ${
+          open ? "tw-opacity-100" : "tw-opacity-0 tw-pointer-events-none"
+        }`}
         onClick={onClose}
       />
+
+      {/* sidebar */}
       <aside
-        className={`fixed z-50 inset-y-0 left-0 w-64 bg-white border-r border-gray-200 text-gray-900 transform transition-transform lg:translate-x-0 lg:static lg:block
-          ${open ? "translate-x-0" : "-translate-x-full"}`}
+        className={`tw-fixed tw-z-50 tw-inset-y-0 tw-left-0 tw-w-64
+        tw-bg-slate-900 tw-text-slate-100
+        tw-transform tw-transition-transform tw-duration-300 tw-ease-in-out
+        lg:tw-translate-x-0 lg:tw-static lg:tw-block
+        ${open ? "tw-translate-x-0" : "-tw-translate-x-full"}`}
       >
-        <div className="p-6 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <Shield className="w-8 h-8 text-blue-500" />
-            <span className="text-xl font-bold text-gray-900">AegisZT</span>
+        <div className="tw-p-6 tw-flex tw-justify-between tw-items-center">
+          <div className="tw-flex tw-items-center tw-space-x-2">
+            <Shield className="tw-w-8 tw-h-8 tw-text-blue-400" />
+            <span className="tw-text-xl tw-font-bold">AegisZT</span>
           </div>
-          <button onClick={onClose} className="lg:hidden">
-            <X className="w-6 h-6 text-gray-600" />
-          </button>
+          <Button 
+            icon="pi pi-times" 
+            onClick={onClose} 
+            text 
+            className="lg:tw-hidden tw-text-slate-300"
+            size="small"
+          />
         </div>
-        <nav className="mt-6 space-y-1">
-          {menuItems.map((item, idx) => {
-            const Icon = item.icon;
+
+        <nav className="tw-mt-6 tw-space-y-1 tw-px-2">
+          {menuItems.map(({ icon: Icon, label, path = "#" }, idx) => {
+            const isActive =
+              path === "/"
+                ? pathname === "/"
+                : pathname.startsWith(path);
+
             return (
-              <a
+              <Link
                 key={idx}
-                href="#"
-                className={`flex items-center px-4 py-3 space-x-3 rounded-lg ${
-                  item.active ? "bg-blue-50 text-blue-600 border-r-2 border-blue-600" : "text-gray-600 hover:bg-gray-50"
+                href={path}
+                aria-current={isActive ? "page" : undefined}
+                onClick={onClose} 
+                className={`tw-flex tw-items-center tw-gap-3 tw-px-3 tw-py-2 tw-rounded-lg tw-transition-colors ${
+                  isActive
+                    ? "tw-bg-slate-700 tw-text-slate-100"
+                    : "tw-text-slate-300 hover:tw-bg-slate-700 hover:tw-text-white"
                 }`}
               >
-                <Icon className="w-5 h-5" />
-                <span>{item.label}</span>
-              </a>
+                <Icon className="tw-w-5 tw-h-5" />
+                <span className="tw-text-sm tw-font-medium">{label}</span>
+              </Link>
             );
           })}
         </nav>

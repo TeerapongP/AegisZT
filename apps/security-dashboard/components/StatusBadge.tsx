@@ -1,15 +1,26 @@
 import { EventStatus } from '@/types/eventStatus';
 import React from 'react';
+import { Tag } from 'primereact/tag';
 
 export default function StatusBadge({ status }: { status: EventStatus }) {
-  const map = {
-    Success: 'bg-green-100 text-green-800',
-    Failure: 'bg-red-100 text-red-800'
-  } as const;
+  const getSeverity = (status: EventStatus) => {
+    switch (status) {
+      case 'Success':
+        return 'success';
+      case 'Failure':
+        return 'danger';
+      case 'Warning':
+        return 'warning';
+      default:
+        return 'info';
+    }
+  };
 
   return (
-    <span className={`px-2 py-1 text-xs font-medium rounded-full ${map[status]}`}>
-      {status}
-    </span>
+    <Tag 
+      value={status} 
+      severity={getSeverity(status)}
+      rounded
+    />
   );
 }

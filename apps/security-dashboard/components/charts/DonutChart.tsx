@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
+import { Card } from 'primereact/card';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -65,14 +66,13 @@ export default function DonutChart() {
   }, []);
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Alerts by severity</h3>
-      <div className="h-64 flex items-center">
-        <div className="w-48 h-48 mx-auto">
+    <Card className="tw-shadow-sm" title="Alerts by severity">
+      <div className="tw-h-64 tw-flex tw-items-center">
+        <div className="tw-w-48 tw-h-48 tw-mx-auto">
           <canvas ref={canvasRef} />
         </div>
         <ChartLegend />
       </div>
-    </div>
+    </Card>
   );
 }

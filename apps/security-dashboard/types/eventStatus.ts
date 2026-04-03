@@ -1,1 +1,1 @@
-export type EventStatus = 'Success' | 'Failure';
+export type EventStatus = 'Success' | 'Failure' | 'Warning';
