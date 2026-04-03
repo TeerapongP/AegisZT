@@ -1,6 +1,6 @@
 export interface FilterValues {
-  status: 'all' | 'success' | 'failure' | 'warning';
-  severity: 'all' | 'low' | 'medium' | 'high' | 'critical';
-  service: 'all' | 'web' | 'ssh' | 'database' | 'api';
+  status: string;
+  severity: string;
+  service: string;
   date: Date | null
 }
