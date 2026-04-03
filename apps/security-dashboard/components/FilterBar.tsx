@@ -4,27 +4,73 @@ import { AlertCircle, Zap, Database, Funnel } from 'lucide-react';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
+import type { FilterValues } from '@/types/filterValues';
 
-interface FilterValues {
-  status: 'all' | 'success' | 'failure' | 'warning';
-  severity: 'all' | 'low' | 'medium' | 'high' | 'critical';
-  service: 'all' | 'web' | 'ssh' | 'database' | 'api';
-  date?: Date | null;
+export interface FilterOption {
+  label: string;
+  value: string;
 }
+
+const defaultValues: FilterValues = {
+  status: 'all',
+  severity: 'all',
+  service: 'all',
+  date: null,
+};
+
+const defaultStatusOptions: FilterOption[] = [
+  { label: 'All Status', value: 'all' },
+  { label: 'Success', value: 'success' },
+  { label: 'Failure', value: 'failure' },
+  { label: 'Warning', value: 'warning' },
+];
+
+const defaultSeverityOptions: FilterOption[] = [
+  { label: 'All Levels', value: 'all' },
+  { label: 'Low', value: 'low' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'High', value: 'high' },
+  { label: 'Critical', value: 'critical' },
+];
+
+const defaultServiceOptions: FilterOption[] = [
+  { label: 'All Services', value: 'all' },
+  { label: 'Web Application', value: 'web' },
+  { label: 'SSH', value: 'ssh' },
+  { label: 'Database', value: 'database' },
+  { label: 'API', value: 'api' },
+];
 
 export default function FilterBar({
   onChange,
   onExport,
+  title = 'Event Filters',
+  subtitle = 'Refine your security event analysis',
+  statusLabel = 'Status',
+  severityLabel = 'Threat Level',
+  serviceLabel = 'Service Type',
+  dateLabel = 'Time Range',
+  exportLabel = 'Export Data',
+  initialValues = defaultValues,
+  statusOptions = defaultStatusOptions,
+  severityOptions = defaultSeverityOptions,
+  serviceOptions = defaultServiceOptions,
 }: {
   onChange?: (values: FilterValues) => void;
   onExport?: () => void;
+  title?: string;
+  subtitle?: string;
+  statusLabel?: string;
+  severityLabel?: string;
+  serviceLabel?: string;
+  dateLabel?: string;
+  exportLabel?: string;
+  initialValues?: FilterValues;
+  statusOptions?: FilterOption[];
+  severityOptions?: FilterOption[];
+  serviceOptions?: FilterOption[];
 }) {
-  const [values, setValues] = useState<FilterValues>({
-    status: 'all',
-    severity: 'all',
-    service: 'all',
-    date: null,
-  });
+  const [values, setValues] = useState<FilterValues>(initialValues);
 
   const update = (patch: Partial<FilterValues>) => {
     const next = { ...values, ...patch };
@@ -33,36 +79,19 @@ export default function FilterBar({
   };
 
   const reset = () => {
-    const resetValues: FilterValues = { status: 'all', severity: 'all', service: 'all', date: null };
+    const resetValues: FilterValues = { ...initialValues };
     setValues(resetValues);
     onChange?.(resetValues);
   };
 
   const hasActive = useMemo(
-    () => values.status !== 'all' || values.severity !== 'all' || values.service !== 'all' || !!values.date,
-    [values]
+    () =>
+      values.status !== initialValues.status ||
+      values.severity !== initialValues.severity ||
+      values.service !== initialValues.service ||
+      !!values.date,
+    [values, initialValues]
   );
-
-  const statusOptions = [
-    { label: 'All Status', value: 'all' },
-    { label: 'Success', value: 'success' },
-    { label: 'Failure', value: 'failure' },
-    { label: 'Warning', value: 'warning' },
-  ];
-  const severityOptions = [
-    { label: 'All Levels', value: 'all' },
-    { label: 'Low', value: 'low' },
-    { label: 'Medium', value: 'medium' },
-    { label: 'High', value: 'high' },
-    { label: 'Critical', value: 'critical' },
-  ];
-  const serviceOptions = [
-    { label: 'All Services', value: 'all' },
-    { label: 'Web Application', value: 'web' },
-    { label: 'SSH', value: 'ssh' },
-    { label: 'Database', value: 'database' },
-    { label: 'API', value: 'api' },
-  ];
 
   // shared PrimeReact passThrough styles for inputs (สูง 40px, pill, โฟกัสฟ้า)
   const inputPt = {
@@ -88,8 +117,8 @@ export default function FilterBar({
               <Funnel className="tw-h-5 tw-w-5 tw-text-white" />
             </div>
             <div>
-              <h3 className="tw-text-lg tw-font-bold tw-text-slate-900">Event Filters</h3>
-              <p className="tw-text-xs tw-text-slate-600 tw-mt-0.5">Refine your security event analysis</p>
+              <h3 className="tw-text-lg tw-font-bold tw-text-slate-900">{title}</h3>
+              <p className="tw-text-xs tw-text-slate-600 tw-mt-0.5">{subtitle}</p>
             </div>
           </div>
           <span
@@ -107,7 +136,7 @@ export default function FilterBar({
       {/* Controls */}
       <div className="tw-px-6 tw-py-6 tw-bg-white">
         <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-5">
-          <Field label="Status" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
+          <Field label={statusLabel} icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.status}
               options={statusOptions}
@@ -118,7 +147,7 @@ export default function FilterBar({
             />
           </Field>
 
-          <Field label="Threat Level" icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
+          <Field label={severityLabel} icon={<AlertCircle className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.severity}
               options={severityOptions}
@@ -129,7 +158,7 @@ export default function FilterBar({
             />
           </Field>
 
-          <Field label="Service Type" icon={<Zap className="tw-h-3.5 tw-w-3.5" />}>
+          <Field label={serviceLabel} icon={<Zap className="tw-h-3.5 tw-w-3.5" />}>
             <Dropdown
               value={values.service}
               options={serviceOptions}
@@ -140,10 +169,13 @@ export default function FilterBar({
             />
           </Field>
 
-          <Field label="Time Range" icon={<Database className="tw-h-3.5 tw-w-3.5" />}>
+          <Field label={dateLabel} icon={<Database className="tw-h-3.5 tw-w-3.5" />}>
             <Calendar
               value={values.date}
-              onChange={(e) => update({ date: (e as any).value as Date | null })}
+              onChange={(e) => {
+                const nextDate = e.value instanceof Date || e.value === null ? e.value : null;
+                update({ date: nextDate });
+              }}
               placeholder="Select Date"
               dateFormat="dd/mm/yy"
               showIcon
@@ -180,7 +212,7 @@ export default function FilterBar({
             </div>
 
             <Button
-              label="Export Data"
+              label={exportLabel}
               icon="pi pi-download"
               onClick={onExport}
               size="small"
