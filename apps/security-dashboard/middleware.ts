@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
-import { auth } from "@/auth";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const SESSION_COOKIE = "aegis_session";
 const PUBLIC_PATHS = ["/api/auth", "/login", "/forgot-password"];
@@ -8,8 +8,8 @@ function isPublicPath(pathname: string) {
   return PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
 }
 
-export default auth((request) => {
-  const { nextUrl, url, cookies, auth: session } = request;
+export default async function middleware(request: NextRequest) {
+  const { nextUrl, url, cookies } = request;
   const pathname = nextUrl.pathname;
 
   // Demo sign-in hook: /?login=1 creates a session cookie, then lands on dashboard.
@@ -26,7 +26,8 @@ export default auth((request) => {
     return response;
   }
 
-  const hasSession = Boolean(cookies.get(SESSION_COOKIE)?.value) || Boolean(session);
+  const token = await getToken({ req: request, secret: process.env.AUTH_SECRET });
+  const hasSession = Boolean(cookies.get(SESSION_COOKIE)?.value) || Boolean(token);
   const isPublic = isPublicPath(pathname);
 
   if (!hasSession && !isPublic) {
@@ -38,7 +39,7 @@ export default auth((request) => {
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
