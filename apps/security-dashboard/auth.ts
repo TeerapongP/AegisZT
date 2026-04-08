@@ -1,35 +1,40 @@
-import NextAuth from "next-auth";
-import Passkey from "next-auth/providers/passkey";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+export default {
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
   },
   providers: [
-    Passkey({
-      relayingParty: {
-        id: process.env.WEBAUTHN_RP_ID,
-        name: "Hybrid AI-SOC Triage",
+    CredentialsProvider({
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "analyst@example.com" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+        return {
+          id: "1",
+          email: credentials.email as string,
+          name: "SOC Analyst",
+          role: "analyst",
+        };
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: any) {
       if (user) {
-        token.role = "analyst";
+        token.role = user.role || "analyst";
       }
-
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       if (session.user) {
-        session.user.role = typeof token.role === "string" ? token.role : undefined;
+        session.user.role = token.role;
       }
-
       return session;
     },
   },
-});
+};
